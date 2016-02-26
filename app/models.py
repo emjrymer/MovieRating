@@ -35,8 +35,14 @@ class Movie(models.Model):
     war = models.BooleanField(default=0)
     western = models.BooleanField(default=0)
 
+    def __str__(self):
+        return self.movie_title
+
 
 class Review(models.Model):
     reviewer = models.ForeignKey(Rater)
     movie = models.ForeignKey(Movie)
     rating = models.IntegerField()
+
+    def __str__(self):
+        return self.movie.movie_title

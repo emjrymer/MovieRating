@@ -24,7 +24,7 @@
 <a href={% url 'TopTwenty' %}> Top Twenty Movies </a>
 <ul class="list-group">
 {% for movie in all_movies %}
-<li class="list-group-item">{{ movie }}</li>
+<a href="{% url 'one_movie_view' movie.id %}" class="list-group-item">{{ movie }}</a>
 {% endfor %}
 </ul>
 </div>

@@ -1,32 +1,24 @@
-{% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link href="../static/main.css" rel="stylesheet" type="text/css">
-    <title>Top Twenty</title>
+    <title>One Rater View</title>
 </head>
 <body>
-<div class="header">
-<h1>Top Twenty Movies</h1>
-</div>
-<div class="logo">
-<span class="glyphicon glyphicon-list"></span>
-<span class="glyphicon glyphicon-star"></span>
-<span class="glyphicon glyphicon-star-empty"></span>
-<span class="glyphicon glyphicon-film"></span>
-<span class="glyphicon glyphicon-pencil"></span>
-</div>
+<h1>One Rater View</h1>
 <br><br><br><br>
-
-<div class="list-group">
-{% for review in top20 %}
-    <a href="{% url 'one_movie_view' review.id %}" class="list-group-item">{{ review }}</a>
-    <div>{{ review.avg_rating }}</div>
-{% endfor %}
-</div>
+<table>
+{{ raters.occupation }}
+{{ raters.age }}
+{{ raters.gender }}
+{{ raters.zip_code }}
+{% for movie in movies %}
+    {{ movie.movie }}
+    {{ movie.rating }}
+    {% endfor %}
+</table>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>

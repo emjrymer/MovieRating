@@ -4,14 +4,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="../static/main.css" rel="stylesheet" type="text/css">
     <title>Top Twenty</title>
 </head>
 <body>
+<div class="header">
 <h1>Top Twenty Movies</h1>
+</div>
+<div class="logo">
+<span class="glyphicon glyphicon-list"></span>
+<span class="glyphicon glyphicon-star"></span>
+<span class="glyphicon glyphicon-star-empty"></span>
+<span class="glyphicon glyphicon-film"></span>
+<span class="glyphicon glyphicon-pencil"></span>
+</div>
+<br><br><br><br>
+
+<div class="list-group">
 {% for review in top20 %}
-   <div><a href="#">{{ review }}</a></div>
+    <a href="{% url 'index_view' %}" class="list-group-item">{{ review.0 }}</a>
+    <a href="{% url 'index_view' %}" class="list-group-item">{{ review.1 }}</a>
 {% endfor %}
+</div>
 
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>

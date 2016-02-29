@@ -9,6 +9,11 @@
     <title>Top Twenty</title>
 </head>
 <body>
+<div class="container">
+<nav class="navbar navbar-inverse">
+    <a href={% url 'index_view' %}> Home</a>
+    <a href={% url 'TopTwenty' %}> Top Twenty Movies </a>
+</nav>
 <div class="header">
 <h1>Top Twenty Movies</h1>
 </div>
@@ -27,7 +32,7 @@
     <div>{{ review.avg_rating }}</div>
 {% endfor %}
 </div>
-
+</div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>

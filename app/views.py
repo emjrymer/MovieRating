@@ -1,13 +1,23 @@
 import operator
+
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_list_or_404
 from django.views.generic import View
 
-from app.models import Movie, Review, Rater
+from app.models import Movie, Review, Rater, Ureview
 from django.db.models import Avg
 
 
 def index_view(request):
-    return render(request, 'index.html', {})
+    all_movies = Movie.objects.all()
+    user_review = request.POST.get('review_movie')
+    movie_review = request.POST.get('message_body')
+    if user_review and movie_review:
+        Ureview.objects.create(user_review=user_review, movie_review=movie_review)
+        return HttpResponseRedirect(reverse('app.views.index_view'))
+    all_ureview = Ureview.objects.all()
+    return render(request, "index.html", {"all_ureview": all_ureview, 'all_movies': all_movies})
 
 
 #def one_movie_view(request):
@@ -57,12 +67,14 @@ def rater_on_click(request, pk):
     return render(request, 'one_rater_view.html', {'raters': x, 'movies': movies})
 
 
+#don't need this
+'''
 def every_movie_view(request):
     all_movies = Movie.objects.all()
     return render(request, 'index.html', {'all_movies': all_movies})
 
 #don't need this
-'''def every_movie_view(request):
+def every_movie_view(request):
     average_rating = []
     for item in Movie.objects.all():
         average_rating.append((item.movie_title, (Review.objects.filter(movie=item).aggregate(Avg('rating')))))
@@ -71,7 +83,6 @@ def every_movie_view(request):
         movie_rating.append((item[0], item[1]['rating__avg']))
     all_movies = sorted(movie_rating, key=lambda x: x[1], reverse=True)
     return render(request, 'index.html', {'all_movies': all_movies})
-
 
 
 def get_reviewer_and_movie(request):

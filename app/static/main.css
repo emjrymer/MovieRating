@@ -1,3 +1,8 @@
+
+.container {
+    margin: 0;
+}
+
 .header {
     position: fixed;
     background-color: lightgray;
@@ -17,4 +22,14 @@
     width: 100%;
     height: auto;
     z-index: 1111;
+}
+
+.movie_list{
+    width: 50%;
+    float: left;
+}
+
+.review_board{
+    width: 50%;
+    float: right;
 }

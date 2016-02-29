@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +9,35 @@
     <title>One Rater View</title>
 </head>
 <body>
+<div class="container">
+<nav class="navbar navbar-inverse">
+    <a href={% url 'index_view' %}> Home</a>
+    <a href={% url 'TopTwenty' %}> Top Twenty Movies </a>
+</nav>
+<div class="header">
 <h1>One Rater View</h1>
+</div>
+<div class="logo">
+        <span class="glyphicon glyphicon-list"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star-empty"></span>
+        <span class="glyphicon glyphicon-film"></span>
+        <span class="glyphicon glyphicon-pencil"></span>
+    </div>
 <br><br><br><br>
 <table>
-{{ raters.occupation }}
-{{ raters.age }}
-{{ raters.gender }}
-{{ raters.zip_code }}
+<div>{{ raters.occupation }}</div>
+<div>{{ raters.age }}</div>
+<div>{{ raters.gender }}</div>
+<div>{{ raters.zip_code }}</div>
 {% for movie in movies %}
-    {{ movie.movie }}
-    {{ movie.rating }}
+    <div>{{ movie.movie }}</div>
+    <div>{{ movie.rating }}</div>
     {% endfor %}
 </table>
 
+
+</div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>

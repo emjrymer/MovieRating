@@ -47,3 +47,11 @@ class Review(models.Model):
 
     def __str__(self):
         return self.movie.movie_title
+
+
+class Ureview(models.Model):
+    user_review = models.TextField()
+    user_movie = models.TextField()
+
+    class Meta:
+        ordering = ["-id"]

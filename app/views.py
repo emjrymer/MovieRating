@@ -1,7 +1,9 @@
+import json
 import operator
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.forms import model_to_dict
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_list_or_404
 from django.views.generic import View
 
@@ -91,4 +93,72 @@ def get_reviewer_and_movie(request):
         individual_people_movie.append((item.reviewer.id, item.movie))
     print(individual_people_movie)
     return render(request, 'index.html', {'all_review': individual_people_movie})'''
+
+
+class FullMovieListApiView(View):
+
+    def get(self, request):
+        movie_list = list(Movie.objects.all().values())
+        return HttpResponse(json.dumps(movie_list), content_type='application/json')
+
+    def post(self, request):
+        movie_title = request.POST.get('movie_title')
+        release_date = request.POST.get('release_date')
+        video_release_date = request.POST.get('video_release_date')
+        imdb = request.POST.get('imdb')
+        movie_object = Movie.objects.create(movie_title=movie_title, release_date=release_date, video_release_date=video_release_date, imdb=imdb)
+        movie_dict = model_to_dict(movie_object)
+        return HttpResponse(json.dumps(movie_dict), status=201, content_type='application/json')
+
+
+class FullRaterListApiView(View):
+
+    def get(self, request):
+        rater_list = list(Rater.objects.all().values())
+        return HttpResponse(json.dumps(rater_list), content_type='application/json')
+
+    def post(self, request):
+        age = request.POST.get('age')
+        gender = request.POST.get('gender')
+        occupation = request.POST.get('occupation')
+        zip_code = request.POST.get('zip_code')
+        rater_object = Rater.objects.create(age=age, gender=gender, occupation=occupation, zip_code=zip_code)
+        rater_dict = model_to_dict(rater_object)
+        return HttpResponse(json.dumps(rater_dict), status=201, content_type='application/json')
+
+
+class FullReviewListApiView(View):
+
+    def get(self, request):
+        review_list = list(Review.objects.all().values())
+        return HttpResponse(json.dumps(review_list), content_type='application/json')
+
+    def post(self, request):
+        reviewer_id = request.POST.get('reviewer_id')
+        movie_id = request.POST.get('movie_id')
+        rating = request.POST.get('rating')
+        review_object = Review.objects.create(reviewer_id=reviewer_id, movie_id=movie_id, rating=rating)
+        review_dict = model_to_dict(review_object)
+        return HttpResponse(json.dumps(review_dict), status=201, content_type='application/json')
+
+
+class SingleMovieApiView(View):
+
+    def get(self, request, pk):
+        movie = list(Review.objects.filter(id=pk).values())
+        return HttpResponse(json.dumps(movie), content_type='application/json')
+
+
+class SingleRaterApiView(View):
+
+    def get(self, request, pk):
+        rater = list(Review.objects.filter(id=pk).values())
+        return HttpResponse(json.dumps(rater), content_type='application/json')
+
+
+class SingleReviewApiView(View):
+
+    def get(self, request, pk):
+        review = list(Review.objects.filter(id=pk).values())
+        return HttpResponse(json.dumps(review), content_type='application/json')
 

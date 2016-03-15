@@ -1,30 +1,5 @@
-{% load staticfiles %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link href="../static/main.css" rel="stylesheet" type="text/css">
-    <title>Home</title>
-</head>
-<body>
-<div class="container">
-    <nav class="navbar navbar-inverse">
-        <a href={% url 'index_view' %}> Home</a>
-        <a href={% url 'TopTwenty' %}> Top Twenty Movies </a>
-    </nav>
-    <div class="header">
-        <h1>Home page</h1>
-    </div>
-    <div class="logo">
-        <span class="glyphicon glyphicon-list"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star-empty"></span>
-        <span class="glyphicon glyphicon-film"></span>
-        <span class="glyphicon glyphicon-pencil"></span>
-    </div>
-    <br><br><br><br><br>
+{% extends 'base.html' %}
+{% block content %}
     <div class="review_board>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -52,16 +27,4 @@
           </div>
         </div>
     {% endfor %}
-</div>
-
-    <div class="movie_list">
-        <ul class="list-group">
-            {% for movie in all_movies %}
-            <a href="{% url 'one_movie_view' movie.id %}" class="list-group-item">{{ movie }}</a>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
